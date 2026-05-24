@@ -13,7 +13,7 @@ run "bucket_name_follows_primary_name" {
   command = plan
 
   assert {
-    condition     = aws_s3_bucket.state.bucket == "test-test-useast1-state"
+    condition     = aws_s3_bucket.state.bucket == "test-test-use1-state"
     error_message = "bucket name should be $${project}-$${environment}-$${region_code}-state"
   }
 }
@@ -22,7 +22,7 @@ run "lock_table_name_follows_primary_name" {
   command = plan
 
   assert {
-    condition     = aws_dynamodb_table.lock.name == "test-test-useast1-state-locks"
+    condition     = aws_dynamodb_table.lock.name == "test-test-use1-state-locks"
     error_message = "lock table name should be $${primary_name}-state-locks"
   }
 }
@@ -31,7 +31,7 @@ run "kms_alias_follows_primary_name" {
   command = plan
 
   assert {
-    condition     = aws_kms_alias.state.name == "alias/test-test-useast1-state"
+    condition     = aws_kms_alias.state.name == "alias/test-test-use1-state"
     error_message = "KMS alias should be alias/$${primary_name}-state"
   }
 }
@@ -108,7 +108,7 @@ run "region_compression_eu_west_2" {
   }
 
   assert {
-    condition     = aws_s3_bucket.state.bucket == "test-test-euwest2-state"
+    condition     = aws_s3_bucket.state.bucket == "test-test-euw2-state"
     error_message = "region compression should strip dashes and keep the trailing digit"
   }
 }
@@ -123,7 +123,7 @@ run "region_compression_ap_southeast_1" {
   }
 
   assert {
-    condition     = aws_s3_bucket.state.bucket == "test-test-apsoutheast1-state"
+    condition     = aws_s3_bucket.state.bucket == "test-test-apse1-state"
     error_message = "region compression should preserve the trailing digit"
   }
 }
