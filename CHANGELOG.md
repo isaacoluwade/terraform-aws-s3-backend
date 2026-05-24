@@ -4,6 +4,22 @@ All notable changes to this module are documented here. Format based on
 [Keep a Changelog](https://keepachangelog.com/), versioning follows
 [SemVer](https://semver.org/).
 
+## [2.0.0] - 2026-05-24
+
+### Breaking changes
+
+- **Region short-code derivation rewritten** (S-1 fix). The `region_code`
+  local previously derived its value from a substring formula that produced
+  non-canonical codes (`us-east-1` → `useast1`, `eu-west-2` → `euwest2`,
+  `ap-southeast-1` → `apsoutheast1`). v2.0.0 replaces it with an explicit
+  `region_code_map` lookup, giving the canonical short codes
+  (`use1`, `euw2`, `apse1`, ...). **Every resource name and every `Name`
+  tag in this module shifts as a result.** Consumers upgrading from
+  v1.x will see destroy+recreate on first apply.
+
+  See [`UPGRADE_GUIDE.md`](../UPGRADE_GUIDE.md) at the workspace root for
+  the recommended per-environment cutover sequence.
+
 ## [1.0.0] - 2026-05-22
 
 ### Added
